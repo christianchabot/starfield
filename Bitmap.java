@@ -11,6 +11,10 @@ public class Bitmap {
 		pixels = new int[width * height];
 	}
 
+	public int[] getFrameBuffer() {
+		return pixels;
+	}
+
 	public int getWidth() {
 		return width;
 	}
@@ -27,11 +31,5 @@ public class Bitmap {
 	public void drawPixel(int x, int y, byte a, byte r, byte g, byte b) {
 		int color = (int) (a << 24) | (int) (r << 16) | (int) (g << 8) | (int) b;
 		pixels[x + y*width] = color;
-	}
-
-	public void copyToIntArray(int[] frameBuffer) {
-		for (int i = 0; i < width*height; i++) {
-			frameBuffer[i] = pixels[i];
-		}
 	}
 }

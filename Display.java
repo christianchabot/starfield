@@ -9,11 +9,11 @@ import javax.swing.JFrame;
 public class Display extends Canvas {
 	
 	private final JFrame frame;
-	private final RenderContext frameBuffer;
 	private final BufferedImage displayImage;
-	private final int[] displayComponents;
 	private final BufferStrategy bufferStrategy;
 	private final Graphics graphics;
+
+	private int[] displayComponents;
 
 	public Display(int width, int height, String title) {
 		Dimension size = new Dimension(width, height);
@@ -21,7 +21,6 @@ public class Display extends Canvas {
 		setMinimumSize(size);
 		setMaximumSize(size);
 
-		frameBuffer = new RenderContext(width, height);
 		displayImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		displayComponents = 
 			((DataBufferInt) displayImage.getRaster().getDataBuffer()).getData();
@@ -29,7 +28,6 @@ public class Display extends Canvas {
 		frame = new JFrame();
 		frame.add(this);
 		frame.setSize(size);
-		//frame.pack();
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
@@ -41,14 +39,9 @@ public class Display extends Canvas {
 		graphics = bufferStrategy.getDrawGraphics();
 	}
 
-	public RenderContext getFrameBuffer() {
-		return (RenderContext) frameBuffer;
-	}
-
-	public void swapBuffers() {
-		frameBuffer.copyToIntArray(displayComponents);
-		graphics.drawImage(displayImage, 0, 0, frameBuffer.getWidth(),
-			frameBuffer.getHeight(), null);
+	public void swapBuffers(int[] frameBuffer, int width, int height) {
+		System.arraycopy(frameBuffer, 0, displayComponents, 0, frameBuffer.length);
+		graphics.drawImage(displayImage, 0, 0, width, height, null);
 		bufferStrategy.show();
 	}
 }
