@@ -32,7 +32,7 @@ public class Stars3D {
 	}
 
 	public void updateAndRender(Bitmap target, float delta) {	
-		target.clear(0xff000000);
+		//target.clear(0xff000000);
 
 		float halfWidth = target.getWidth()/2.0f;
 		float halfHeight = target.getHeight()/2.0f;
