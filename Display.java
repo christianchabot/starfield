@@ -16,6 +16,9 @@ public class Display extends Canvas {
 	private final int width, height;
 
 	public Display(int width, int height, String title) {
+		if (width < 0 || height < 0)
+			throw new IllegalArgumentException();
+
 		Dimension size = new Dimension(width, height);
 		setPreferredSize(size);
 		setMinimumSize(size);
@@ -33,7 +36,8 @@ public class Display extends Canvas {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
-		frame.setTitle(title);
+		if (title != null)
+			frame.setTitle(title);
 		frame.setVisible(true);
 
 		createBufferStrategy(1);
