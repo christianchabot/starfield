@@ -14,7 +14,7 @@ public class Main {
 		frameBuffer = display.getFrameBuffer();
 		stars = new Stars3D(4096, 64.0f, 20.0f, 70.0f);
 
-		/* Bad code smell calculating the time could be a function */
+		/* Bad code smell calculating the delta could be a function */
 		long previousTime = System.nanoTime();
 		while (true) {
 			long currentTime = System.nanoTime();

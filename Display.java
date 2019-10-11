@@ -8,13 +8,12 @@ import javax.swing.JFrame;
 
 public class Display extends Canvas {
 	
-	private final JFrame frame;
 	private final BufferedImage displayImage;
 	private final BufferStrategy bufferStrategy;
 	private final Graphics graphics;
+	private final JFrame frame;
 	private final int[] displayComponents;
-
-	private int width, height;
+	private final int width, height;
 
 	public Display(int width, int height, String title) {
 		Dimension size = new Dimension(width, height);
