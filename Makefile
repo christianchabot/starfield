@@ -1,4 +1,4 @@
-production=Bitmap.java Main.java Display.java Stars3D.java
+production=Main.java Display.java Stars3D.java
 junit=DisplayTest.java
 
 lib=org.junit.runner.JUnitCore
