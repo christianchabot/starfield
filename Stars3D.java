@@ -31,11 +31,9 @@ public class Stars3D {
 		starZ[index] = ((float) Math.random() + 0.00001f) * spread;
 	}
 
-	public void updateAndRender(Bitmap target, float delta) {	
-		//target.clear(0xff000000);
-
-		float halfWidth = target.getWidth()/2.0f;
-		float halfHeight = target.getHeight()/2.0f;
+	public void updateAndRender(int[] frameBuffer, int width, int height, float delta) {	
+		float halfWidth = width/2.0f;
+		float halfHeight = height/2.0f;
 
 		for (int i = 0; i < numStars; i++) {
 			starZ[i] -= delta * speed;
@@ -47,10 +45,10 @@ public class Stars3D {
 			int x = (int) ((starX[i] / (starZ[i] * fieldOfView)) * halfWidth + halfWidth);
 			int y = (int) ((starY[i] / (starZ[i] * fieldOfView)) * halfHeight + halfHeight);
 
-			if (x < 0 || x >= target.getWidth() || y < 0 || y >= target.getHeight())
+			if (x < 0 || x >= width || y < 0 || y >= height)
 				initStar(i);
 			else
-				target.drawPixel(x, y, (byte)0xff, (byte)0xff, (byte)0xff, (byte)0xff);
+				frameBuffer[x + y*width] = 0xffffffff;
 		}
 	}
 }

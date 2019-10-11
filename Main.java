@@ -1,7 +1,6 @@
 
 public class Main {
 	public static final String TITLE = "Software Renderer";
-
 	public static final int WIDTH = 720;
 	public static final int HEIGHT = 640;
 
@@ -22,11 +21,10 @@ public class Main {
 			float delta = (float) ((currentTime - previousTime) / 1000000000.0);
 			previousTime = currentTime;
 
-			frameBuffer.clear(0xff000000);
-			stars.updateAndRender(frameBuffer, delta);
-
 			int width = frameBuffer.getWidth();
 			int height = frameBuffer.getHeight();
+			frameBuffer.clear(0xff000000);
+			stars.updateAndRender(frameBuffer.getFrameBuffer(), width, height, delta);
 			display.swapBuffers(frameBuffer.getFrameBuffer());
 		}
 	}
