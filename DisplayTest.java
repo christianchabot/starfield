@@ -11,4 +11,10 @@ public class DisplayTest {
 	public void testDisplayConstructorHeight() {
 		Display display = new Display(20, -1, null);
 	}
+
+	@Test
+	public void testFrameBuffer() {
+		Display display = new Display(20, 20, null);
+		assertEquals(20 * 20, display.getFrameBuffer().length);
+	}
 }
