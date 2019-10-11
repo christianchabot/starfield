@@ -34,7 +34,10 @@ public class Stars3D {
 		starZ[index] = ((float) Math.random() + 0.00001f) * spread;
 	}
 
-	public void updateAndRender(int[] frameBuffer, int width, int height, float delta) {	
+	public void updateAndRender(int[] frameBuffer, int width, int height, float delta) {
+		if (width*height != frameBuffer.length)
+			throw new IllegalArgumentException();
+
 		float halfWidth = width/2.0f;
 		float halfHeight = height/2.0f;
 
