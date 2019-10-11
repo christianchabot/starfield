@@ -9,6 +9,9 @@ public class Stars3D {
 	private final float[] starZ;
 
 	public Stars3D(int numStars, float spread, float speed, float angle) {
+		if (numStars < 0 || spread < 0 || speed < 0 || angle < 0)
+			throw new IllegalArgumentException();
+
 		this.numStars = numStars;
 		this.spread = spread;
 		this.speed = speed;
