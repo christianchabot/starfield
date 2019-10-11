@@ -46,11 +46,7 @@ public class Display extends Canvas {
 		return displayComponents;
 	}
 
-	public void swapBuffers() {//int[] frameBuffer) {
-		//if (frameBuffer.length != this.width*this.height)
-		//		throw new IllegalArgumentException();
-
-		//System.arraycopy(frameBuffer, 0, displayComponents, 0, frameBuffer.length);
+	public void swapBuffers() {
 		graphics.drawImage(displayImage, 0, 0, this.width, this.height, null);
 		bufferStrategy.show();
 	}
