@@ -17,4 +17,11 @@ public class DisplayTest {
 		Display display = new Display(20, 20, null);
 		assertEquals(20 * 20, display.getFrameBuffer().length);
 	}
+
+	@Test
+	public void testFrameBufferNull() {
+		Display display = new Display(20, 20, null);
+		assertEquals(true, display.getFrameBuffer() != null);
+
+	}
 }
