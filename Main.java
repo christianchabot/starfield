@@ -11,7 +11,7 @@ public class Main {
 	public static void main(String[] args) {
 		/* These should be static factory methods */
 		display = new Display(WIDTH, HEIGHT, TITLE);
-		frameBuffer = new int[WIDTH * HEIGHT];
+		frameBuffer = display.getFrameBuffer();
 		stars = new Stars3D(4096, 64.0f, 20.0f, 70.0f);
 
 		/* Bad code smell calculating the time could be a function */
@@ -21,10 +21,13 @@ public class Main {
 			float delta = (float) ((currentTime - previousTime) / 1000000000.0);
 			previousTime = currentTime;
 
+			/* Clear the frame buffer. */
 			for (int i = 0; i < frameBuffer.length; ++i)
 				frameBuffer[i] = 0xff000000;
+
+			/* Draw stars to frame buffer. */
 			stars.updateAndRender(frameBuffer, WIDTH, HEIGHT, delta);
-			display.swapBuffers(frameBuffer);
+			display.swapBuffers();
 		}
 	}
 }
