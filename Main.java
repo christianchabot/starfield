@@ -8,13 +8,14 @@ public class Main {
 	private static Display display;
 	private static RenderContext frameBuffer;
 	private static Stars3D stars;
-	private static int[] image;
 	
 	public static void main(String[] args) {
+		/* These should be static factory methods */
 		display = new Display(WIDTH, HEIGHT, TITLE);
 		frameBuffer = new RenderContext(WIDTH, HEIGHT);
 		stars = new Stars3D(4096, 64.0f, 20.0f, 70.0f);
 
+		/* Bad code smell calculating the time could be a function */
 		long previousTime = System.nanoTime();
 		while (true) {
 			long currentTime = System.nanoTime();
@@ -24,7 +25,9 @@ public class Main {
 			frameBuffer.clear(0xff000000);
 			stars.updateAndRender(frameBuffer, delta);
 
-			display.swapBuffers(frameBuffer.getFrameBuffer(), frameBuffer.getWidth(), frameBuffer.getHeight());
+			int width = frameBuffer.getWidth();
+			int height = frameBuffer.getHeight();
+			display.swapBuffers(frameBuffer.getFrameBuffer());//, width, height);
 		}
 	}
 }

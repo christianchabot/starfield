@@ -12,8 +12,9 @@ public class Display extends Canvas {
 	private final BufferedImage displayImage;
 	private final BufferStrategy bufferStrategy;
 	private final Graphics graphics;
+	private final int[] displayComponents;
 
-	private int[] displayComponents;
+	private int width, height;
 
 	public Display(int width, int height, String title) {
 		Dimension size = new Dimension(width, height);
@@ -21,6 +22,8 @@ public class Display extends Canvas {
 		setMinimumSize(size);
 		setMaximumSize(size);
 
+		this.width = width;
+		this.height = height;
 		displayImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		displayComponents = 
 			((DataBufferInt) displayImage.getRaster().getDataBuffer()).getData();
@@ -39,9 +42,12 @@ public class Display extends Canvas {
 		graphics = bufferStrategy.getDrawGraphics();
 	}
 
-	public void swapBuffers(int[] frameBuffer, int width, int height) {
+	public void swapBuffers(int[] frameBuffer) {
+		if (frameBuffer.length != this.width*this.height)
+				throw new IllegalArgumentException();
+
 		System.arraycopy(frameBuffer, 0, displayComponents, 0, frameBuffer.length);
-		graphics.drawImage(displayImage, 0, 0, width, height, null);
+		graphics.drawImage(displayImage, 0, 0, this.width, this.height, null);
 		bufferStrategy.show();
 	}
 }
